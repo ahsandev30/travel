@@ -1,0 +1,1252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WanderTrail | Adventure Travel Blog</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* CSS Reset & Base Styles */
+        :root {
+            --primary-color: #4CAF50;
+            --secondary-color: #8BC34A;
+            --accent-color: #FF9800;
+            --text-color: #2d3436;
+            --light-text: #636e72;
+            --bg-color: #ffffff;
+            --card-bg: #f5f6fa;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        .dark-mode {
+            --primary-color: #8BC34A;
+            --secondary-color: #4CAF50;
+            --text-color: #f5f6fa;
+            --light-text: #dfe6e9;
+            --bg-color: #1a2e22;
+            --card-bg: #2d3e32;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: var(--transition);
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .container {
+            width: 100%;
+            padding: 0 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header Styles */
+        .main-header {
+            background-color: var(--bg-color);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            transition: var(--transition);
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .logo-text {
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: var(--primary-color);
+        }
+
+        .mobile-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            display: none;
+            padding: 5px;
+        }
+
+        /* Desktop Navigation */
+        .desktop-nav {
+            display: none;
+        }
+
+        .desktop-nav-links {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        .desktop-nav-links a {
+            font-weight: 500;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        .desktop-nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .desktop-nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .desktop-nav-links a.active {
+            color: var(--primary-color);
+        }
+
+        .desktop-nav-links a.active::after {
+            width: 100%;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            z-index: 99;
+            transition: var(--transition);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+        }
+
+        .light-icon, .dark-icon {
+            position: absolute;
+            transition: var(--transition);
+        }
+
+        .light-icon {
+            opacity: 0;
+            transform: rotate(90deg);
+        }
+
+        .dark-mode .light-icon {
+            opacity: 1;
+            transform: rotate(0);
+        }
+
+        .dark-mode .dark-icon {
+            opacity: 0;
+            transform: rotate(-90deg);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 50px 0;
+        }
+
+        .hero-content {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .hero-text {
+            order: 2;
+        }
+
+        .hero-tag {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .hero-text h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            line-height: 1.3;
+            font-weight: 700;
+        }
+
+        .hero-text p {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
+
+        .hero-meta {
+            display: flex;
+            gap: 15px;
+            font-size: 0.85rem;
+            color: var(--light-text);
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .read-btn {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .read-btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            order: 1;
+            box-shadow: var(--shadow);
+            height: 250px;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .image-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 50%);
+        }
+
+        /* Featured Destinations */
+        .featured-destinations {
+            padding: 40px 0;
+            margin: 40px 0;
+        }
+
+        .destinations-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .destination-card {
+            position: relative;
+            border-radius: 8px;
+            overflow: hidden;
+            height: 120px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .destination-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .destination-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .destination-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent 50%);
+            display: flex;
+            align-items: flex-end;
+            padding: 15px;
+        }
+
+        .destination-name {
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        /* Posts Grid */
+        .section-title {
+            font-size: 1.4rem;
+            margin: 25px 0 15px;
+            position: relative;
+            display: inline-block;
+            font-weight: 700;
+        }
+
+        .title-accent {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px;
+        }
+
+        .featured-grid, .posts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        /* Cards */
+        .featured-card, .post-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .featured-card:hover, .post-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .featured-card .card-image, .post-card .post-image {
+            position: relative;
+            height: 180px;
+        }
+
+        .featured-card img, .post-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .card-tag, .post-tag {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-content, .post-content {
+            padding: 15px;
+        }
+
+        .featured-card h4, .post-card h4 {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            font-weight: 600;
+        }
+
+        .featured-card p, .post-card p {
+            color: var(--light-text);
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+        }
+
+        .card-meta, .post-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.8rem;
+            color: var(--light-text);
+        }
+
+        .author-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .author-name {
+            font-weight: 500;
+        }
+
+        .engagement {
+            display: flex;
+            gap: 12px;
+        }
+
+        .engagement span {
+            display: flex;
+            align-items: center;
+            gap: 3px;
+            font-size: 0.8rem;
+        }
+
+        .post-meta {
+            margin-top: 15px;
+            font-size: 0.8rem;
+        }
+
+        /* Newsletter */
+        .newsletter {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 30px 20px;
+            margin: 40px 0;
+            border-radius: 10px;
+            text-align: center;
+            background-image: url('https://images.pexels.com/photos/346885/pexels-photo-346885.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-blend-mode: multiply;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .newsletter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(76, 175, 80, 0.8);
+            z-index: 1;
+        }
+
+        .newsletter-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .newsletter h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .newsletter p {
+            margin-bottom: 20px;
+            opacity: 0.9;
+            font-size: 0.95rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .newsletter-form {
+            display: flex;
+            max-width: 100%;
+            margin: 0 auto;
+            background-color: white;
+            border-radius: 5px;
+            overflow: hidden;
+            max-width: 500px;
+        }
+
+        .newsletter-form input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            font-size: 0.9rem;
+            color: var(--text-color);
+            min-width: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form input:focus {
+            outline: none;
+        }
+
+        .newsletter-form button {
+            background-color: var(--text-color);
+            color: white;
+            border: none;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: var(--transition);
+            font-weight: 600;
+            white-space: nowrap;
+            flex-shrink: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .newsletter-form button:hover {
+            background-color: var(--light-text);
+        }
+
+        /* Footer */
+        .main-footer {
+            background-color: var(--card-bg);
+            padding: 50px 0 20px;
+        }
+
+        .footer-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo span {
+            color: var(--primary-color);
+        }
+
+        .footer-about p {
+            color: var(--light-text);
+            margin-bottom: 15px;
+            font-size: 0.9rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+        }
+
+        .social-links a {
+            width: 36px;
+            height: 36px;
+            border-radius: 5px;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .social-links a:hover {
+            background-color: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .footer-links h4 {
+            font-size: 1.1rem;
+            margin-bottom: 12px;
+            position: relative;
+            display: inline-block;
+            font-weight: 600;
+        }
+
+        .footer-links h4::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 25px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-links ul {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 8px;
+        }
+
+        .footer-links a {
+            color: var(--light-text);
+            transition: var(--transition);
+            font-size: 0.9rem;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            margin-top: 20px;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--light-text);
+            font-size: 0.8rem;
+        }
+
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background-color: var(--bg-color);
+            z-index: 1000;
+            transition: var(--transition);
+            padding: 20px;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .close-menu-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+        }
+
+        .mobile-nav-links {
+            list-style: none;
+            margin-bottom: 20px;
+        }
+
+        .mobile-nav-links li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-nav-links a {
+            font-size: 1rem;
+            font-weight: 500;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .mobile-search-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .mobile-search-container input {
+            width: 100%;
+            padding: 10px 40px 10px 15px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+            background-color: var(--card-bg);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .mobile-search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--light-text);
+            cursor: pointer;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            pointer-events: none;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        /* Media Queries */
+        @media (min-width: 576px) {
+            .hero-text h2 {
+                font-size: 2rem;
+            }
+
+            .featured-grid, .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .footer-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .destinations-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .destination-card {
+                height: 140px;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .hero {
+                padding: 60px 0;
+            }
+            
+            .hero-content {
+                flex-direction: row;
+                align-items: center;
+                gap: 40px;
+            }
+            
+            .hero-text {
+                order: 1;
+                flex: 1;
+            }
+            
+            .hero-image {
+                order: 2;
+                flex: 1;
+                height: 350px;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.2rem;
+            }
+            
+            .featured-grid, .posts-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .destinations-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .destination-card {
+                height: 160px;
+            }
+            
+            .footer-container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 992px) {
+            .mobile-menu-btn {
+                display: none;
+            }
+            
+            .desktop-nav {
+                display: block;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.5rem;
+            }
+            
+            .hero-image {
+                height: 400px;
+            }
+            
+            .featured-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            
+            .posts-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+        }
+
+        @media (min-width: 1200px) {
+            .container {
+                padding: 0;
+            }
+            
+            .hero-text h2 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-text p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle">
+        <i class="fas fa-moon dark-icon"></i>
+        <i class="fas fa-sun light-icon"></i>
+    </div>
+    
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-container">
+                <span class="logo-icon"><i class="fas fa-mountain"></i></span>
+                <h1 class="logo-text">Wander<span>Trail</span></h1>
+            </div>
+            
+            <nav class="desktop-nav">
+                <ul class="desktop-nav-links">
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Destinations</a></li>
+                    <li><a href="#">Hiking</a></li>
+                    <li><a href="#">Travel</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+            
+            <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo-container">
+                <span class="logo-icon"><i class="fas fa-mountain"></i></span>
+                <h1 class="logo-text">Wander<span>Trail</span></h1>
+            </div>
+            <button class="close-menu-btn"><i class="fas fa-times"></i></button>
+        </div>
+        <ul class="mobile-nav-links">
+            <li><a href="#" class="active">Home</a></li>
+            <li><a href="#">Destinations</a></li>
+            <li><a href="#">Hiking</a></li>
+            <li><a href="#">Travel</a></li>
+            <li><a href="#">About</a></li>
+        </ul>
+        <div class="mobile-search-container">
+            <input type="text" placeholder="Search adventures...">
+            <button class="mobile-search-btn"><i class="fas fa-search"></i></button>
+        </div>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-image">
+                <div class="image-overlay"></div>
+                <img src="https://images.pexels.com/photos/3553218/pexels-photo-3553218.jpeg" alt="Mountain Hiking">
+            </div>
+            <div class="hero-text">
+                <span class="hero-tag">Featured</span>
+                <h2>Top 10 Himalayan Treks for Beginners in 2024</h2>
+                <p>Discover the most breathtaking yet accessible Himalayan treks perfect for first-time hikers.</p>
+                <div class="hero-meta">
+                    <span class="author">By Rajiv Sharma</span>
+                    <span class="date">May 15, 2024</span>
+                    <span class="read-time">8 min read</span>
+                </div>
+                <button class="read-btn">Read Article <i class="fas fa-arrow-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Destinations -->
+    <section class="featured-destinations">
+        <div class="container">
+            <h3 class="section-title">Featured Destinations <span class="title-accent"></span></h3>
+            <div class="destinations-grid">
+                <div class="destination-card">
+                    <img src="https://images.pexels.com/photos/3408744/pexels-photo-3408744.jpeg" alt="Swiss Alps">
+                    <div class="destination-overlay">
+                        <span class="destination-name">Swiss Alps</span>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.pexels.com/photos/2386310/pexels-photo-2386310.jpeg" alt="Norway Fjords">
+                    <div class="destination-overlay">
+                        <span class="destination-name">Norwegian Fjords</span>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg" alt="Nepal Himalayas">
+                    <div class="destination-overlay">
+                        <span class="destination-name">Nepal Himalayas</span>
+                    </div>
+                </div>
+                <div class="destination-card">
+                    <img src="https://images.pexels.com/photos/450441/pexels-photo-450441.jpeg" alt="Thai Islands">
+                    <div class="destination-overlay">
+                        <span class="destination-name">Thai Islands</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <!-- Featured Posts -->
+            <section class="featured-posts">
+                <h3 class="section-title">Featured Adventures <span class="title-accent"></span></h3>
+                <div class="featured-grid">
+                    <!-- Post 1 -->
+                    <article class="featured-card">
+                        <div class="card-image">
+                            <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg" alt="Hiking Gear">
+                            <span class="card-tag">Gear</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>Essential Hiking Gear for Your First Trek</h4>
+                            <p>The must-have equipment that will keep you safe and comfortable on the trails.</p>
+                            <div class="card-meta">
+                                <div class="author-info">
+                                    <span class="author-name">Priya Patel</span>
+                                </div>
+                                <div class="engagement">
+                                    <span><i class="fas fa-heart"></i> 187</span>
+                                    <span><i class="fas fa-comment"></i> 32</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 2 -->
+                    <article class="featured-card">
+                        <div class="card-image">
+                            <img src="https://images.pexels.com/photos/450441/pexels-photo-450441.jpeg" alt="Beach Travel">
+                            <span class="card-tag">Travel</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>Hidden Beach Paradises in Southeast Asia</h4>
+                            <p>Discover these untouched tropical beaches away from the tourist crowds.</p>
+                            <div class="card-meta">
+                                <div class="author-info">
+                                    <span class="author-name">David Wong</span>
+                                </div>
+                                <div class="engagement">
+                                    <span><i class="fas fa-heart"></i> 245</span>
+                                    <span><i class="fas fa-comment"></i> 54</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 3 -->
+                    <article class="featured-card">
+                        <div class="card-image">
+                            <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg" alt="Mountain Town">
+                            <span class="card-tag">Destinations</span>
+                        </div>
+                        <div class="card-content">
+                            <h4>5 Underrated Mountain Towns You Must Visit</h4>
+                            <p>Charming alpine villages that offer authentic experiences without the crowds.</p>
+                            <div class="card-meta">
+                                <div class="author-info">
+                                    <span class="author-name">James Peterson</span>
+                                </div>
+                                <div class="engagement">
+                                    <span><i class="fas fa-heart"></i> 312</span>
+                                    <span><i class="fas fa-comment"></i> 42</span>
+                                </div>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Latest Posts -->
+            <section class="latest-posts">
+                <h3 class="section-title">Latest Stories <span class="title-accent"></span></h3>
+                <div class="posts-grid">
+                    <!-- Post 1 -->
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src="https://images.pexels.com/photos/1365425/pexels-photo-1365425.jpeg" alt="Mountain Trek">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-tag">Hiking</span>
+                            <h4>Annapurna Base Camp Trek: Complete Guide</h4>
+                            <p>Everything you need to know to conquer this classic Nepalese trek.</p>
+                            <div class="post-meta">
+                                <span>Arjun Mehta • May 10, 2024</span>
+                                <span>12 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 2 -->
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src="https://images.pexels.com/photos/672532/pexels-photo-672532.jpeg" alt="Backpacking">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-tag">Travel</span>
+                            <h4>Ultimate Backpacking Packing List for 2024</h4>
+                            <p>Lightweight essentials that will make your backpacking trip comfortable.</p>
+                            <div class="post-meta">
+                                <span>Sophie Martin • May 8, 2024</span>
+                                <span>6 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 3 -->
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src="https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg" alt="Mountain View">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-tag">Destinations</span>
+                            <h4>5 Underrated Mountain Towns You Must Visit</h4>
+                            <p>Charming alpine villages that offer authentic experiences without the crowds.</p>
+                            <div class="post-meta">
+                                <span>James Peterson • May 5, 2024</span>
+                                <span>15 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                    
+                    <!-- Post 4 -->
+                    <article class="post-card">
+                        <div class="post-image">
+                            <img src="https://images.pexels.com/photos/618833/pexels-photo-618833.jpeg" alt="Camping Gear">
+                        </div>
+                        <div class="post-content">
+                            <span class="post-tag">Gear</span>
+                            <h4>Best Lightweight Tents for Backpacking 2024</h4>
+                            <p>Our top picks for durable yet lightweight shelters for your next adventure.</p>
+                            <div class="post-meta">
+                                <span>Lisa Wong • May 3, 2024</span>
+                                <span>10 min read</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+            </section>
+
+            <!-- Newsletter -->
+            <section class="newsletter">
+                <div class="newsletter-content">
+                    <h3>Join Our Adventure Community</h3>
+                    <p>Get weekly travel inspiration, hiking tips, and exclusive deals straight to your inbox.</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Your email address">
+                        <button type="submit">Subscribe</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-container">
+                <div class="footer-about">
+                    <div class="footer-logo">Wander<span>Trail</span></div>
+                    <p>Your guide to unforgettable adventures and outdoor experiences around the world.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-pinterest"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Categories</h4>
+                    <ul>
+                        <li><a href="#">Hiking</a></li>
+                        <li><a href="#">Travel</a></li>
+                        <li><a href="#">Gear</a></li>
+                        <li><a href="#">Destinations</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 WanderTrail. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const closeMenuBtn = document.querySelector('.close-menu-btn');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Theme Toggle
+        const themeToggle = document.querySelector('.theme-toggle');
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
+
+        // Check for saved theme preference or use system preference
+        const currentTheme = localStorage.getItem('theme');
+        if (currentTheme === 'dark' || (!currentTheme && prefersDarkScheme.matches)) {
+            document.body.classList.add('dark-mode');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-mode');
+            const theme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        });
+
+        // Like Button Functionality
+        const likeButtons = document.querySelectorAll('.fa-heart');
+        
+        likeButtons.forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.classList.toggle('liked');
+                const likesCount = this.parentElement;
+                if (this.classList.contains('liked')) {
+                    let currentLikes = parseInt(likesCount.textContent);
+                    likesCount.textContent = currentLikes + 1;
+                } else {
+                    let currentLikes = parseInt(likesCount.textContent);
+                    likesCount.textContent = currentLikes - 1;
+                }
+            });
+        });
+
+        // Newsletter Form Submission
+        const newsletterForm = document.querySelector('.newsletter-form');
+        
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            if (emailInput.value && emailInput.value.includes('@')) {
+                alert('Thank you for joining our adventure community!');
+                emailInput.value = '';
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+
+        // Card Click Effect
+        const cards = document.querySelectorAll('.featured-card, .post-card');
+        
+        cards.forEach(card => {
+            card.addEventListener('mousedown', function() {
+                this.style.transform = 'translateY(2px)';
+            });
+            
+            card.addEventListener('mouseup', function() {
+                this.style.transform = '';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = '';
+            });
+            
+            // Make entire card clickable
+            card.addEventListener('click', function(e) {
+                if (e.target.tagName !== 'BUTTON' && e.target.tagName !== 'I') {
+                    alert(`Navigating to: ${this.querySelector('h4').textContent}`);
+                }
+            });
+        });
+
+        // Header Scroll Effect
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.main-header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+            } else {
+                header.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            }
+        });
+    </script>
+</body>
+</html>
