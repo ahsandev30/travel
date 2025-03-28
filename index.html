@@ -114,7 +114,7 @@
 
         /* Desktop Navigation */
         .desktop-nav {
-            display: none;
+            display: block;
         }
 
         .desktop-nav-links {
@@ -127,6 +127,7 @@
             font-weight: 500;
             position: relative;
             padding: 5px 0;
+            font-size: 0.95rem;
         }
 
         .desktop-nav-links a::after {
@@ -197,13 +198,13 @@
 
         /* Hero Section */
         .hero {
-            padding: 50px 0;
+            padding: 30px 0;
         }
 
         .hero-content {
             display: flex;
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
 
         .hero-text {
@@ -289,8 +290,8 @@
 
         /* Featured Destinations */
         .featured-destinations {
-            padding: 40px 0;
-            margin: 40px 0;
+            padding: 30px 0;
+            margin: 30px 0;
         }
 
         .destinations-grid {
@@ -542,7 +543,7 @@
         /* Footer */
         .main-footer {
             background-color: var(--card-bg);
-            padding: 50px 0 20px;
+            padding: 30px 0 15px;
         }
 
         .footer-container {
@@ -732,6 +733,16 @@
         }
 
         /* Media Queries */
+        @media (max-width: 768px) {
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+        }
+
         @media (min-width: 576px) {
             .hero-text h2 {
                 font-size: 2rem;
@@ -798,14 +809,6 @@
         }
 
         @media (min-width: 992px) {
-            .mobile-menu-btn {
-                display: none;
-            }
-            
-            .desktop-nav {
-                display: block;
-            }
-            
             .hero-text h2 {
                 font-size: 2.5rem;
             }
